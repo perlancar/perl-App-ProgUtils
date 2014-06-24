@@ -1,0 +1,73 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use strict;
+use warnings;
+
+use Perinci::CmdLine 1.04;
+
+# DATE
+# VERSION
+
+our %SPEC;
+$SPEC{progless} = {
+    v => 1.1,
+    summary => 'Show program file with `less`',
+    description => <<'_',
+
+Basically
+
+    % progless PROG
+
+is the same as:
+
+    % less `which PROG`
+
+except that it offers tab completion.
+
+_
+    args => {
+        program => {
+            schema => 'str*',
+            req => 1,
+            pos => 0,
+            completion => sub {
+                require SHARYANTO::Complete::Util;
+                my %args = @_;
+                SHARYANTO::Complete::Util::mimic_shell_dir_completion(
+                    completion => SHARYANTO::Complete::Util::complete_program(
+                        word      => $args{word},
+                    )
+                );
+            },
+        },
+    },
+    deps => {
+        prog => 'less',
+    },
+};
+sub progless {
+    require File::Which;
+
+    my %args = @_;
+    exec "less", File::Which::which($args{program});
+    # [200]; # unreached
+}
+
+Perinci::CmdLine->new(url => '/main/progless')->run;
+
+# ABSTRACT: Show program file with less
+# PODNAME: progless
+
+=head1 SYNOPSIS
+
+Basic usage:
+
+ % progless mpath
+
+To activate bash completion:
+
+ % complete -C progless progless; # can be put in bash startup file e.g. .bashrc
+ % progless mpa<tab>
+
+

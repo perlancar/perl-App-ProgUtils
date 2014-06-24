@@ -1,0 +1,76 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use strict;
+use warnings;
+
+use Perinci::CmdLine 1.04;
+
+# DATE
+# VERSION
+
+our %SPEC;
+$SPEC{progedit} = {
+    v => 1.1,
+    summary => 'Launch editor for program',
+    description => <<'_',
+
+Basically
+
+    % progedit PROG
+
+is the same as:
+
+    % $EDITOR `which PROG`
+
+except that it offers tab completion.
+
+_
+    args => {
+        program => {
+            schema => 'str*',
+            req => 1,
+            pos => 0,
+            completion => sub {
+                require SHARYANTO::Complete::Util;
+                my %args = @_;
+                SHARYANTO::Complete::Util::mimic_shell_dir_completion(
+                    completion => SHARYANTO::Complete::Util::complete_program(
+                        word      => $args{word},
+                    )
+                );
+            },
+        },
+    },
+};
+sub progedit {
+    require File::Which;
+    require String::ShellQuote;
+
+    return [412, "EDITOR is not set"] unless defined($ENV{EDITOR});
+
+    my %args = @_;
+    # array variant doesn't always work because $EDITOR can contain args, e.g.
+    # "emacsclient -t"
+    my $cmd = "$ENV{EDITOR} " . String::ShellQuote::shell_quote(
+        File::Which::which($args{program}));
+    exec $cmd;
+    # [200]; # unreached
+}
+
+Perinci::CmdLine->new(url => '/main/progedit')->run;
+
+# ABSTRACT: Launch editor for program
+# PODNAME: progedit
+
+=head1 SYNOPSIS
+
+Basic usage:
+
+ % progedit mpath
+
+To activate bash completion:
+
+ % complete -C progedit progedit; # can be put in bash startup file e.g. .bashrc
+ % progedit mpa<tab>
+
