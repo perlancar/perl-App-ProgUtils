@@ -32,10 +32,10 @@ _
             req => 1,
             pos => 0,
             completion => sub {
-                require SHARYANTO::Complete::Util;
+                require Complete::Util;
                 my %args = @_;
-                SHARYANTO::Complete::Util::mimic_shell_dir_completion(
-                    completion => SHARYANTO::Complete::Util::complete_program(
+                Complete::Util::mimic_shell_dir_completion(
+                    completion => Complete::Util::complete_program(
                         word      => $args{word},
                     )
                 );
