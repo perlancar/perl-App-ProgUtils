@@ -1,5 +1,12 @@
 Revision history for App-ProgUtils
 
+0.02    2014-06-25 (SHARYANTO)
+
+        - No functional changes.
+
+        - Use Complete::Util which replaces SHARYANTO::Complete::Util.
+
+
 0.01    2014-06-24 (SHARYANTO)
 
         - First release.
