@@ -37,6 +37,7 @@ _
                 Complete::Util::mimic_shell_dir_completion(
                     completion => Complete::Util::complete_program(
                         word      => $args{word},
+                        ci        => 1,
                     )
                 );
             },
