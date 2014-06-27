@@ -4,6 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
+use App::ProgUtils;
 use Perinci::CmdLine 1.04;
 
 # DATE
@@ -31,16 +32,7 @@ _
             schema => 'str*',
             req => 1,
             pos => 0,
-            completion => sub {
-                require Complete::Util;
-                my %args = @_;
-                Complete::Util::mimic_shell_dir_completion(
-                    completion => Complete::Util::complete_program(
-                        word      => $args{word},
-                        ci        => 1,
-                    )
-                );
-            },
+            completion => $App::ProgUtils::_complete_program,
         },
     },
 };
