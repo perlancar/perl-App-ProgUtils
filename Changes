@@ -1,5 +1,10 @@
 Revision history for App-ProgUtils
 
+0.04    2014-06-27 (SHARYANTO)
+
+        - Turn off log_any_app so programs start a bit faster.
+
+
 0.03    2014-06-26 (SHARYANTO)
 
         - Complete programs case insensitively for convenience.
