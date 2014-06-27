@@ -51,7 +51,10 @@ sub progedit {
     # [200]; # unreached
 }
 
-Perinci::CmdLine->new(url => '/main/progedit')->run;
+Perinci::CmdLine->new(
+    log_any_app => 0,
+    url => '/main/progedit',
+)->run;
 
 # ABSTRACT: Launch editor for program
 # PODNAME: progedit

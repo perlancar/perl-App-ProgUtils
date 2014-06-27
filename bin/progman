@@ -47,7 +47,10 @@ sub progman {
     # [200]; # unreached
 }
 
-Perinci::CmdLine->new(url => '/main/progman')->run;
+Perinci::CmdLine->new(
+    log_any_app => 0,
+    url => '/main/progman',
+)->run;
 
 # ABSTRACT: Show manpage for program
 # PODNAME: progman

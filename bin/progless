@@ -47,7 +47,10 @@ sub progless {
     # [200]; # unreached
 }
 
-Perinci::CmdLine->new(url => '/main/progless')->run;
+Perinci::CmdLine->new(
+    log_any_app => 0,
+    url => '/main/progless',
+)->run;
 
 # ABSTRACT: Show program file with less
 # PODNAME: progless
