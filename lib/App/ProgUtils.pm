@@ -11,11 +11,11 @@ our $_complete_program = sub {
     require Complete::Util;
     my %args = @_;
     Complete::Util::mimic_shell_dir_completion(
-        completion => Complete::Util::complete_program(
+        Complete::Util::complete_program(
             word      => $args{word},
             ci        => 1,
         )
-    );
+      );
 };
 
 1;
