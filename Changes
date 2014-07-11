@@ -1,5 +1,14 @@
 Revision history for App-ProgUtils
 
+0.07    2014-07-11 (SHARYANTO)
+
+        - [Bugfix] Adjust to Complete::Util 0.12.
+
+        - If completion word contains "/" (like "../bin" or "/home/u1/") it
+          means user wants to complete from filesystem, so we switch to using
+          complete_file().
+
+
 0.06    2014-07-02 (SHARYANTO)
 
         - No functional changes.
