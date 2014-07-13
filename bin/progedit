@@ -20,12 +20,12 @@ Basically
 
     % progedit PROG
 
-is the same as:
+is roughly the same as:
 
     % $EDITOR `which PROG`
 
-except that it offers tab completion.
-
+except that it offers tab completion and can also search PROG in the current
+directory or normal path (e.g. `progless ../bin/foo`).
 _
     args => {
         program => {
@@ -37,7 +37,6 @@ _
     },
 };
 sub progedit {
-    require File::Which;
     require String::ShellQuote;
 
     return [412, "EDITOR is not set"] unless defined($ENV{EDITOR});
@@ -46,7 +45,7 @@ sub progedit {
     # array variant doesn't always work because $EDITOR can contain args, e.g.
     # "emacsclient -t"
     my $cmd = "$ENV{EDITOR} " . String::ShellQuote::shell_quote(
-        File::Which::which($args{program}));
+        App::ProgUtils::_search_program($args{program}));
     exec $cmd;
     # [200]; # unreached
 }

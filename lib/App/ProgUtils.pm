@@ -1,40 +1,48 @@
 package App::ProgUtils;
 
+# DATE
+# VERSION
+
 use 5.010001;
 use strict;
 use warnings;
 
-# VERSION
-# DATE
-
 our $_complete_program = sub {
     require Complete::Util;
+    require List::MoreUtils;
+
     my %args = @_;
 
     my $word = $args{word} // '';
     my $completion;
     my $is_path;
-    if ($word =~ m#/#) {
-        # if user specify path, e.g. ./foo, ../bar, or /usr/bin/ it means she
-        # wants to complete from filesystem. but note that complete_file()
-        # doesn't yet support ci=>1 option.
-        $is_path = 1;
-        $completion = Complete::Util::complete_file(
-            word => $word,
-            #ci   => 1, # convenience
-        );
-    } else {
-        $completion = Complete::Util::complete_program(
-            word      => $args{word},
-            ci        => 1, # convenience
-        );
-    }
+
+    my $c1 = Complete::Util::complete_file(
+        word   => $word,
+        filter => sub { -x $_[0] },
+        #ci    => 1, # convenience, not yet supported by C::U
+    );
+    my $c2 = Complete::Util::complete_program(
+        word => $word,
+        ci   => 1, # convenience
+    );
 
     {
-        completion => $completion,
-        is_path    => $is_path,
+        completion => [ List::MoreUtils::uniq(sort(@$c1, @$c2)) ],
+        is_path    => 1,
     };
 };
+
+sub _search_program {
+    require File::Which;
+
+    my $prog = shift;
+    if ($prog =~ m!/!) {
+        return $prog;
+    } else {
+        return File::Which::which($prog) // $prog;
+    }
+}
 
 1;
 # ABSTRACT: Command line to manipulate programs in PATH
