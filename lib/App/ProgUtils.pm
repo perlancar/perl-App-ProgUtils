@@ -15,7 +15,6 @@ our $_complete_program = sub {
 
     my $word = $args{word} // '';
     my $completion;
-    my $is_path;
 
     # combine all executables (including dirs) and programs in PATH
     my $c1 = Complete::Util::complete_file(
