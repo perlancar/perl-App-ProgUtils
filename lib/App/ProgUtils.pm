@@ -17,6 +17,7 @@ our $_complete_program = sub {
     my $completion;
     my $is_path;
 
+    # combine all executables (including dirs) and programs in PATH
     my $c1 = Complete::Util::complete_file(
         word   => $word,
         filter => sub { -x $_[0] },
