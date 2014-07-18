@@ -1,5 +1,11 @@
 Revision history for App-ProgUtils
 
+0.09    2014-07-18 (SHARYANTO)
+
+        - Switch from Perinci::CmdLine to Perinci::CmdLine::Lite for faster tab
+          completion.
+
+
 0.08    2014-07-13 (SHARYANTO)
 
         - Now can also search program in current directory or its path (e.g.
