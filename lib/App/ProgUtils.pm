@@ -28,7 +28,7 @@ our $_complete_program = sub {
 
     {
         completion => [ List::MoreUtils::uniq(sort(@$c1, @$c2)) ],
-        is_path    => 1,
+        path_sep   => '/',
     };
 };
 
