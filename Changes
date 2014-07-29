@@ -1,6 +1,15 @@
 Revision history for App-ProgUtils
 
+0.10    2014-07-18 (SHARYANTO)
+
+        - No functional changes.
+
+        - Adjust to Complete::Bash 0.06.
+
+
 0.09    2014-07-18 (SHARYANTO)
+
+        - No functional changes.
 
         - Switch from Perinci::CmdLine to Perinci::CmdLine::Lite for faster tab
           completion.
@@ -58,4 +67,3 @@ Revision history for App-ProgUtils
 0.01    2014-06-24 (SHARYANTO)
 
         - First release.
-
