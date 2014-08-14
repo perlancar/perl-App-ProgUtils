@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 use App::ProgUtils;
-use Perinci::CmdLine::Lite;
+use Perinci::CmdLine::Any -prefer_lite=>1;
 
 # DATE
 # VERSION
@@ -46,7 +46,7 @@ sub progless {
     # [200]; # unreached
 }
 
-Perinci::CmdLine::Lite->new(
+Perinci::CmdLine::Any->new(
     url => '/main/progless',
 )->run;
 
