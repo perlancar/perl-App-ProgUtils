@@ -1,0 +1,77 @@
+#!perl
+
+use 5.010;
+use strict;
+use warnings;
+
+use App::ProgUtils;
+use Perinci::CmdLine::Any -prefer_lite=>1;
+
+# DATE
+# VERSION
+
+our %SPEC;
+$SPEC{progpath} = {
+    v => 1.1,
+    summary => 'Locate a command',
+    description => <<'_',
+
+Basically
+
+    % progpath PROG
+
+is roughly the same as:
+
+    % which PROG
+
+except that it's written in Perl and offers (a case-insensitive) tab completion.
+
+_
+    args => {
+        program => {
+            schema => 'str*',
+            req => 1,
+            pos => 0,
+            completion => $App::ProgUtils::_complete_program,
+        },
+        all => {
+            schema => 'bool',
+            cmdline_aliases => {a=>{}},
+        },
+    },
+    "cmdline.default_format" => "text-simple",
+};
+sub progpath {
+    require File::Which;
+
+    my %args = @_;
+
+    my $match;
+    if ($args{all}) {
+        $match = [File::Which::which($args{program})];
+    } else {
+        $match = File::Which::which($args{program});
+        $match = defined($match) ? [$match] : [];
+    }
+    [200, "OK", $match];
+}
+
+Perinci::CmdLine::Any->new(
+    url => '/main/progpath',
+)->run;
+
+# ABSTRACT: Locate a command
+# PODNAME: progpath
+
+=head1 SYNOPSIS
+
+Basic usage:
+
+ % progpath mpath
+ % progpath -a mpath
+
+To activate bash completion:
+
+ % complete -C progpath progpath; # can be put in bash startup file e.g. .bashrc
+ % progpath mplay<tab>
+
