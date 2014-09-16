@@ -50,12 +50,12 @@ sub _search_program {
 
 This distribution provides the following command-line utilities:
 
- progless
  progedit
+ progless
  progman
+ progpath
+
 
 =head1 SEE ALSO
-
-B<which>
 
 =cut
