@@ -50,6 +50,7 @@ sub _search_program {
 
 This distribution provides the following command-line utilities:
 
+ progcat
  progedit
  progless
  progman

@@ -1,0 +1,92 @@
+#!perl
+
+# DATE
+# VERSION
+
+use 5.010;
+use strict;
+use warnings;
+
+use App::ProgUtils;
+use Perinci::CmdLine::Any -prefer_lite=>1;
+
+our %SPEC;
+$SPEC{progcat} = {
+    v => 1.1,
+    summary => 'Print command sources to stdout',
+    description => <<'_',
+
+Basically
+
+    % progcat PROG1 PROG2 ...
+
+is roughly the same as:
+
+    % cat `which PROG1` `which PROG2` ...
+
+except that it's written in Perl and offers (a case-insensitive) tab completion.
+
+_
+    args => {
+        program => {
+            schema => ['array*', of => 'str*', min_len=>1],
+            req => 1,
+            pos => 0,
+            greedy => 1,
+            element_completion => $App::ProgUtils::_complete_program,
+        },
+    },
+};
+sub progcat {
+    my %args = @_;
+
+    my $progs = $args{program};
+    return [400, "Please specify at least one program"] unless @$progs;
+
+    my $has_success;
+    my $has_error;
+    for my $prog (@{$progs}) {
+        my $path = App::ProgUtils::_search_program($prog) or do {
+            warn "progcat: No such program '$prog'\n";
+            $has_error++;
+            next;
+        };
+        open my $fh, "<", $path or do {
+            warn "progcat: Can't open '$path': $!\n";
+            $has_error++;
+            next;
+        };
+        print while <$fh>;
+        close $fh;
+        $has_success++;
+    }
+
+    if ($has_error) {
+        if ($has_success) {
+            return [207, "Some programs failed"];
+        } else {
+            return [500, "All programs failed"];
+        }
+    } else {
+        return [200, "All programs OK"];
+    }
+}
+
+Perinci::CmdLine::Any->new(
+    url => '/main/progcat',
+)->run;
+
+# ABSTRACT: Print command sources to stdout
+# PODNAME: progcat
+
+=head1 SYNOPSIS
+
+Basic usage:
+
+ % progcat dzil
+
+To activate bash completion:
+
+ % complete -C progcat progcat; # can be put in bash startup file e.g. .bashrc
+ % progcat dz<tab>
+
