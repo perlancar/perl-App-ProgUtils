@@ -59,9 +59,3 @@ Basic usage:
 
  % progman mpath
 
-To activate bash completion:
-
- % complete -C progman progman; # can be put in bash startup file e.g. .bashrc
- % progman mpa<tab>
-
-

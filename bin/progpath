@@ -70,8 +70,3 @@ Basic usage:
  % progpath mpath
  % progpath -a mpath
 
-To activate bash completion:
-
- % complete -C progpath progpath; # can be put in bash startup file e.g. .bashrc
- % progpath mplay<tab>
-

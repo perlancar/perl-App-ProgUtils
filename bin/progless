@@ -59,9 +59,3 @@ Basic usage:
 
  % progless mpath
 
-To activate bash completion:
-
- % complete -C progless progless; # can be put in bash startup file e.g. .bashrc
- % progless mpa<tab>
-
-

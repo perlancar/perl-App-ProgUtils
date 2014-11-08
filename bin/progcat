@@ -85,8 +85,3 @@ Basic usage:
 
  % progcat dzil
 
-To activate bash completion:
-
- % complete -C progcat progcat; # can be put in bash startup file e.g. .bashrc
- % progcat dz<tab>
-

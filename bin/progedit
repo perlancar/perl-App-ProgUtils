@@ -63,8 +63,3 @@ Basic usage:
 
  % progedit mpath
 
-To activate bash completion:
-
- % complete -C progedit progedit; # can be put in bash startup file e.g. .bashrc
- % progedit mpa<tab>
-
