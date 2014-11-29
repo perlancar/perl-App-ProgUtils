@@ -1,5 +1,15 @@
 Revision history for App-ProgUtils
 
+0.14    2014-11-28 (PERLANCAR)
+
+	- No functional changes.
+
+	- Adjust to Complete::Bash 0.12.
+
+	- Remove doc about tab completion (now added automatically during
+	  build via Pod::Weaver::Section::BashCompletion::PerinciCmdLine).
+
+
 0.13    2014-10-27 (PERLANCAR)
 
 	- Add utility: progcat.

@@ -27,7 +27,7 @@ our $_complete_program = sub {
     );
 
     {
-        completion => [ List::MoreUtils::uniq(sort(@$c1, @$c2)) ],
+        words      => [ List::MoreUtils::uniq(sort(@$c1, @$c2)) ],
         path_sep   => '/',
     };
 };
