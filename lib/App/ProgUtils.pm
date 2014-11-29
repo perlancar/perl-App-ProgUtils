@@ -48,13 +48,8 @@ sub _search_program {
 
 =head1 SYNOPSIS
 
-This distribution provides the following command-line utilities:
-
- progcat
- progedit
- progless
- progman
- progpath
+This distribution provides several command-line utilities related to programs
+found in PATH. The main purpose of these utilities is tab completion.
 
 
 =head1 SEE ALSO
