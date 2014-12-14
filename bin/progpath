@@ -39,7 +39,6 @@ _
             cmdline_aliases => {a=>{}},
         },
     },
-    "cmdline.default_format" => "text-simple",
 };
 sub progpath {
     require File::Which;
