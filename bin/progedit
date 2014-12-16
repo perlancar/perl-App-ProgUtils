@@ -54,7 +54,7 @@ Perinci::CmdLine::Any->new(
     url => '/main/progedit',
 )->run;
 
-# ABSTRACT: Launch editor for program
+# ABSTRACT: 
 # PODNAME:
 
 =head1 SYNOPSIS

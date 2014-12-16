@@ -50,7 +50,7 @@ Perinci::CmdLine::Any->new(
     url => '/main/progman',
 )->run;
 
-# ABSTRACT: Show manpage for program
+# ABSTRACT: 
 # PODNAME:
 
 =head1 SYNOPSIS

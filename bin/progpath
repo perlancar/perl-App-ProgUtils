@@ -59,7 +59,7 @@ Perinci::CmdLine::Any->new(
     url => '/main/progpath',
 )->run;
 
-# ABSTRACT: Locate a command
+# ABSTRACT: 
 # PODNAME:
 
 =head1 SYNOPSIS

@@ -76,7 +76,7 @@ Perinci::CmdLine::Any->new(
     url => '/main/progcat',
 )->run;
 
-# ABSTRACT: Print command sources to stdout
+# ABSTRACT: 
 # PODNAME:
 
 =head1 SYNOPSIS
