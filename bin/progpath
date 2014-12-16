@@ -60,7 +60,7 @@ Perinci::CmdLine::Any->new(
 )->run;
 
 # ABSTRACT: Locate a command
-# PODNAME: progpath
+# PODNAME:
 
 =head1 SYNOPSIS
 

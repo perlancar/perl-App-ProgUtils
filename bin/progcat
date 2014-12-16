@@ -77,7 +77,7 @@ Perinci::CmdLine::Any->new(
 )->run;
 
 # ABSTRACT: Print command sources to stdout
-# PODNAME: progcat
+# PODNAME:
 
 =head1 SYNOPSIS
 

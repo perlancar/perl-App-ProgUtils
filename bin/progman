@@ -51,7 +51,7 @@ Perinci::CmdLine::Any->new(
 )->run;
 
 # ABSTRACT: Show manpage for program
-# PODNAME: progman
+# PODNAME:
 
 =head1 SYNOPSIS
 

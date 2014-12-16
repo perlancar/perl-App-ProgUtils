@@ -51,7 +51,7 @@ Perinci::CmdLine::Any->new(
 )->run;
 
 # ABSTRACT: Show program file with less
-# PODNAME: progless
+# PODNAME:
 
 =head1 SYNOPSIS
 
