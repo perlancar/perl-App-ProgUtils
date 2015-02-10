@@ -1,14 +1,14 @@
 #!perl
 
+# DATE
+# VERSION
+
 use 5.010;
 use strict;
 use warnings;
 
 use App::ProgUtils;
-use Perinci::CmdLine::Any -prefer_lite=>1;
-
-# DATE
-# VERSION
+use Perinci::CmdLine::Any;
 
 our %SPEC;
 $SPEC{progman} = {
@@ -50,7 +50,7 @@ Perinci::CmdLine::Any->new(
     url => '/main/progman',
 )->run;
 
-# ABSTRACT: 
+# ABSTRACT:
 # PODNAME:
 
 =head1 SYNOPSIS

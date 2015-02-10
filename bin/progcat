@@ -8,7 +8,7 @@ use strict;
 use warnings;
 
 use App::ProgUtils;
-use Perinci::CmdLine::Any -prefer_lite=>1;
+use Perinci::CmdLine::Any;
 
 our %SPEC;
 $SPEC{progcat} = {
@@ -76,7 +76,7 @@ Perinci::CmdLine::Any->new(
     url => '/main/progcat',
 )->run;
 
-# ABSTRACT: 
+# ABSTRACT:
 # PODNAME:
 
 =head1 SYNOPSIS
