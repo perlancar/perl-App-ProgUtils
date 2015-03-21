@@ -48,12 +48,20 @@ sub _search_program {
 
 =head1 SYNOPSIS
 
-This distribution provides several command-line utilities related to programs
-found in PATH. The main purpose of these utilities is tab completion.
+This distribution provides the following command-line utilities related to
+programs found in PATH.
+
+
+The main feature of these utilities is tab completion.
+
+
+=head1 FAQ
+
+#INSERT_BLOCK: App::PMUtils faq
 
 
 =head1 SEE ALSO
 
-L<App::PMUtils>, a similarly spirited distribution.
+#INSERT_BLOCK: App::PMUtils see_also
 
 =cut
