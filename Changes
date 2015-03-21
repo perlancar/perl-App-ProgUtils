@@ -1,5 +1,13 @@
 Revision history for App-ProgUtils
 
+0.15    2015-03-21 (PERLANCAR)
+
+	- No functional changes.
+
+	- [Documentation] Mention list of utilities in main module, add FAQ
+	  & more complete See Also.
+
+
 0.14    2014-11-28 (PERLANCAR)
 
 	- No functional changes.
