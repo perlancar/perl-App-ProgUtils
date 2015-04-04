@@ -49,8 +49,9 @@ sub _search_program {
 =head1 SYNOPSIS
 
 This distribution provides the following command-line utilities related to
-programs found in PATH.
+programs found in PATH:
 
+# INSERT_EXECS_LIST
 
 The main feature of these utilities is tab completion.
 
