@@ -8,7 +8,8 @@ use strict;
 use warnings;
 
 our $_complete_program = sub {
-    require Complete::Util;
+    require Complete::File;
+    require Complete::Program;
     require List::MoreUtils;
 
     my %args = @_;
@@ -16,12 +17,12 @@ our $_complete_program = sub {
     my $word = $args{word} // '';
 
     # combine all executables (including dirs) and programs in PATH
-    my $c1 = Complete::Util::complete_file(
+    my $c1 = Complete::File::complete_file(
         word   => $word,
         filter => sub { -x $_[0] },
         #ci    => 1, # convenience, not yet supported by C::U
     );
-    my $c2 = Complete::Util::complete_program(
+    my $c2 = Complete::Program::complete_program(
         word => $word,
         ci   => 1, # convenience
     );
