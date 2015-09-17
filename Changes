@@ -1,5 +1,13 @@
 Revision history for App-ProgUtils
 
+0.17    2015-09-17 (PERLANCAR)
+
+	- No functional changes.
+
+	- Adjust to Complete::Util 0.36 (complete_file() &
+	  complete_program() split to Complete-File & Complete-Program).
+
+
 0.16    2015-09-03 (PERLANCAR)
 
 	- No functional changes.
