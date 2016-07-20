@@ -29,7 +29,7 @@ except that it's written in Perl and offers (a case-insensitive) tab completion.
 _
     args => {
         program => {
-            schema => ['array*', of => 'str*', min_len=>1],
+            schema => ['array*', of => 'filename*', min_len=>1],
             req => 1,
             pos => 0,
             greedy => 1,
@@ -84,4 +84,3 @@ Perinci::CmdLine::Any->new(
 Basic usage:
 
  % progcat dzil
-

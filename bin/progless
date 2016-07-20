@@ -30,7 +30,7 @@ directory or normal path (e.g. `progless ../bin/foo`).
 _
     args => {
         program => {
-            schema => 'str*',
+            schema => 'filename*',
             req => 1,
             pos => 0,
             completion => $App::ProgUtils::_complete_program,
@@ -58,4 +58,3 @@ Perinci::CmdLine::Any->new(
 Basic usage:
 
  % progless mpath
-

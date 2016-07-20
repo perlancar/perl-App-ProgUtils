@@ -29,7 +29,7 @@ except that it's written in Perl and offers (a case-insensitive) tab completion.
 _
     args => {
         program => {
-            schema => 'str*',
+            schema => 'filename*',
             req => 1,
             pos => 0,
             completion => $App::ProgUtils::_complete_program,
@@ -68,4 +68,3 @@ Basic usage:
 
  % progpath mpath
  % progpath -a mpath
-
