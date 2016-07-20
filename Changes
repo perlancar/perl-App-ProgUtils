@@ -1,5 +1,11 @@
 Revision history for App-ProgUtils
 
+0.18    2016-07-20 (PERLANCAR)
+
+        - Use more specific schemas to reduce code duplication (filename instead
+          of just str).
+
+
 0.17    2015-09-17 (PERLANCAR)
 
 	- No functional changes.
