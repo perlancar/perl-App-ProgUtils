@@ -7,6 +7,8 @@ use 5.010001;
 use strict;
 use warnings;
 
+our %SPEC;
+
 our $_complete_program = sub {
     require Complete::File;
     require Complete::Program;
@@ -44,6 +46,36 @@ sub _search_program {
     }
 }
 
+$SPEC{list_all_programs_in_path} = {
+    v => 1.1,
+    summary => 'List all programs in PATH',
+    args => {
+        with_path => {
+            schema => 'bool*',
+            cmdline_aliases => {
+                'x' => {is_flag=>1, summary => 'Show path of each program', code => sub { $_[0]{with_path} = 1 }},
+            },
+        },
+    },
+};
+sub list_all_programs_in_path {
+    my %args = @_;
+
+    my $with_path = $args{with_path};
+
+    my @dirs = split(($^O =~ /Win32/ ? qr/;/ : qr/:/), $ENV{PATH});
+    my @all_progs;
+    for my $dir (@dirs) {
+        opendir my($dh), $dir or next;
+        for (readdir($dh)) {
+            push @all_progs, ($with_path ? "$dir/$_" : $_)
+                if !(-d "$dir/$_") && (-x _);
+        }
+    }
+
+    [200, "OK", \@all_progs];
+}
+
 1;
 # ABSTRACT: Command line to manipulate programs in PATH
 
@@ -65,5 +97,7 @@ The main feature of these utilities is tab completion.
 =head1 SEE ALSO
 
 #INSERT_BLOCK: App::PMUtils see_also
+
+L<Complete::Program>
 
 =cut
