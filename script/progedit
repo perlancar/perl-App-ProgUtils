@@ -52,6 +52,8 @@ sub progedit {
 
 Perinci::CmdLine::Any->new(
     url => '/main/progedit',
+    read_config => 0,
+    read_env => 0,
 )->run;
 
 # ABSTRACT:
@@ -62,4 +64,3 @@ Perinci::CmdLine::Any->new(
 Basic usage:
 
  % progedit mpath
-

@@ -57,6 +57,8 @@ sub progpath {
 
 Perinci::CmdLine::Any->new(
     url => '/main/progpath',
+    read_config => 0,
+    read_env => 0,
 )->run;
 
 # ABSTRACT:

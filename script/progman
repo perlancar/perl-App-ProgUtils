@@ -48,6 +48,8 @@ sub progman {
 
 Perinci::CmdLine::Any->new(
     url => '/main/progman',
+    read_config => 0,
+    read_env => 0,
 )->run;
 
 # ABSTRACT:
@@ -58,4 +60,3 @@ Perinci::CmdLine::Any->new(
 Basic usage:
 
  % progman mpath
-
