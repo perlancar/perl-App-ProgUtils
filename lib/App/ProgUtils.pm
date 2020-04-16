@@ -1,6 +1,8 @@
 package App::ProgUtils;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -57,6 +59,9 @@ $SPEC{list_all_programs_in_path} = {
             },
         },
     },
+    links => [
+        {url=>'prog:pmlist'},
+    ],
 };
 sub list_all_programs_in_path {
     my %args = @_;

@@ -17,16 +17,26 @@ $SPEC{proglist} = {
     args => {
         query => {
             schema => 're*',
-            req => 1,
+            req => 0,
             pos => 0,
         },
     },
     examples => [
         {
+            summary => 'List all programs that have "font" in their name',
             argv => [qw/font/],
             test => 0,
             'x.doc.show_result'=>0,
         },
+        {
+            summary => 'List all programs',
+            argv => [],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
+    ],
+    links => [
+        {url=>'prog:list-all-programs-in-path'},
     ],
 };
 sub proglist {
@@ -34,7 +44,7 @@ sub proglist {
 
     my %args = @_;
 
-    my $re = $args{query};
+    my $re = $args{query} || qr//;
 
     my @res;
     for my $dir (split /:/, $ENV{PATH}) {
