@@ -60,7 +60,7 @@ $SPEC{list_all_programs_in_path} = {
         },
     },
     links => [
-        {url=>'prog:pmlist'},
+        {url=>'prog:proglist'},
     ],
 };
 sub list_all_programs_in_path {
