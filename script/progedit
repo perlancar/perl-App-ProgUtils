@@ -1,8 +1,5 @@
 #!perl
 
-# DATE
-# VERSION
-
 use 5.010;
 use strict;
 use warnings;
@@ -10,7 +7,13 @@ use warnings;
 use App::ProgUtils;
 use Perinci::CmdLine::Any;
 
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our %SPEC;
+
 $SPEC{progedit} = {
     v => 1.1,
     summary => 'Launch editor for program',
