@@ -1,0 +1,77 @@
+#!perl
+
+use 5.010;
+use strict;
+use warnings;
+
+use App::ProgUtils;
+use Perinci::CmdLine::Any;
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
+our %SPEC;
+
+$SPEC{scriptlist} = {
+    v => 1.1,
+    summary => 'List scripts matching query',
+    description => <<'MARKDOWN',
+
+Basically like <prog:proglist>, except binaries are excluded.
+
+MARKDOWN
+    args => {
+        query => {
+            schema => 're*',
+            req => 0,
+            pos => 0,
+        },
+    },
+    examples => [
+        {
+            summary => 'List all scripts that have "csv" in their name',
+            argv => [qw/csv/],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
+        {
+            summary => 'List all scripts',
+            argv => [],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
+    ],
+    links => [
+    ],
+};
+sub scriptlist {
+    require File::Which;
+
+    my %args = @_;
+
+    my $re = $args{query} || qr//;
+
+    my @res;
+    for my $dir (split /:/, $ENV{PATH}) {
+        opendir my $dh, $dir or next;
+        for my $e (readdir $dh) {
+            next if $e eq '.' || $e eq '..';
+            next if -d $e;
+            next unless $e =~ $re;
+            next if -B "$dir/$e";
+            push @res, $e;
+        }
+    }
+    [200, "OK", \@res];
+}
+
+Perinci::CmdLine::Any->new(
+    url => '/main/scriptlist',
+    read_config => 0,
+    read_env => 0,
+)->run;
+
+# ABSTRACT:
+# PODNAME:
