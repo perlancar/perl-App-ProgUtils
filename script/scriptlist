@@ -21,6 +21,9 @@ $SPEC{scriptlist} = {
 
 Basically like <prog:proglist>, except binaries are excluded.
 
+Note: as of v0.204, `proglist` also sports a `--type` option to filter out
+scripts or binaries.
+
 MARKDOWN
     args => {
         query => {

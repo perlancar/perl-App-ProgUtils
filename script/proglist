@@ -23,23 +23,33 @@ $SPEC{proglist} = {
             req => 0,
             pos => 0,
         },
+        type => {
+            schema => ['str*', in=>[qw/script binary/]],
+        },
     },
     examples => [
-        {
-            summary => 'List all programs that have "font" in their name',
-            argv => [qw/font/],
-            test => 0,
-            'x.doc.show_result'=>0,
-        },
         {
             summary => 'List all programs',
             argv => [],
             test => 0,
             'x.doc.show_result'=>0,
         },
+        {
+            summary => 'List all binaries that have "font" in their name',
+            argv => [qw/font --type=binary/],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
+        {
+            summary => 'List all scripts that have "csv" in their name',
+            argv => [qw/csv --type=script/],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
     ],
     links => [
         {url=>'prog:list-all-programs-in-path'},
+        {url=>'prog:scriptlist'},
     ],
 };
 sub proglist {
@@ -56,6 +66,11 @@ sub proglist {
             next if $e eq '.' || $e eq '..';
             next if -d $e;
             next unless $e =~ $re;
+            if ($args{type}) {
+                my $is_bin = -B "$dir/$e";
+                next if $args{type} eq 'script' &&  $is_bin;
+                next if $args{type} eq 'binary' && !$is_bin;
+            }
             push @res, $e;
         }
     }
