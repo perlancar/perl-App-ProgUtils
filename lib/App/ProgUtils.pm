@@ -4,6 +4,8 @@ use 5.010001;
 use strict;
 use warnings;
 
+use Perinci::Sub::Util qw(gen_modified_sub);
+
 # AUTHORITY
 # DATE
 # DIST
@@ -84,6 +86,96 @@ sub list_all_programs_in_path {
     }
 
     [200, "OK", \@all_progs];
+}
+
+$SPEC{proglist} = {
+    v => 1.1,
+    summary => 'List programs matching query',
+    args => {
+        query => {
+            schema => 're*',
+            req => 0,
+            pos => 0,
+        },
+        type => {
+            schema => ['str*', in=>[qw/script binary/]],
+        },
+        full_path => {
+            summary => 'Show full path of each script',
+            schema => 'true*',
+            cmdline_aliases => {p=>{}},
+        },
+    },
+    examples => [
+        {
+            summary => 'List all programs',
+            argv => [],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
+        {
+            summary => 'List all binaries that have "font" in their name',
+            argv => [qw/font --type=binary/],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
+        {
+            summary => 'List all scripts that have "csv" in their name, show full path of each script',
+            argv => [qw/csv --type=script -p/],
+            test => 0,
+            'x.doc.show_result'=>0,
+        },
+    ],
+    links => [
+        {url=>'prog:list-all-programs-in-path'},
+        {url=>'prog:scriptlist'},
+    ],
+};
+sub proglist {
+    require File::Which;
+
+    my %args = @_;
+
+    my $re = $args{query} || qr//;
+
+    my @res;
+    for my $dir (split /:/, $ENV{PATH}) {
+        opendir my $dh, $dir or next;
+        for my $e (readdir $dh) {
+            next if $e eq '.' || $e eq '..';
+            next if -d $e;
+            next unless $e =~ $re;
+            if ($args{type}) {
+                my $is_bin = -B "$dir/$e";
+                next if $args{type} eq 'script' &&  $is_bin;
+                next if $args{type} eq 'binary' && !$is_bin;
+            }
+            push @res, $args{full_path} ? "$dir/$e" : $e;
+        }
+    }
+    [200, "OK", \@res];
+}
+
+{
+    my $res = gen_modified_sub(
+        output_name => 'scriptlist',
+        base_name => 'proglist',
+        summary => 'List scripts matching query',
+        description => <<'MARKDOWN',
+
+This is a wrapper for <prog:proglist>, it adds the `--type=script` option.
+
+MARKDOWN
+        remove_args => ['type'],
+        modify_meta => sub {
+            my $meta = shift;
+            $meta->{examples} = [];
+        },
+        output_code => sub {
+            proglist(@_, type=>'script');
+        },
+    );
+    die "Can't generate scriptlist(): $res->[0] - $res->[1]" unless $res->[0] == 200;
 }
 
 1;
